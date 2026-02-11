@@ -15,311 +15,207 @@
     --text: #0f172a;
 }
 
+/* Reset & Base */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+
 body {
     background-color: var(--bg);
     color: var(--text);
     font-family: var(--font);
-    margin: 0;
-    min-height: 100vh;
-    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background 0.5s ease;
 }
 
-/* Abstract Background */
-.bg-blur {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.shape {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.4;
-    animation: float 10s infinite alternate;
-}
-
-.shape-1 {
-    width: 400px;
-    height: 400px;
-    background: var(--primary);
-    top: -10%;
-    left: -10%;
-}
-
-.shape-2 {
-    width: 300px;
-    height: 300px;
-    background: var(--secondary);
-    bottom: -10%;
-    right: -10%;
-}
-
-/* Advanced Theme Switch */
-.theme-wrapper {
-    display: flex;
-    align-items: center;
-}
-
-.theme-input {
-    display: none;
-}
-
-.theme-label {
-    width: 65px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    cursor: pointer;
-    position: relative;
-    border: 1px solid var(--glass-border);
-}
-
-.switcher {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: white;
-    left: 4px;
-    transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    box-shadow: 0 0 15px var(--primary);
-}
-
-.theme-input:checked+.theme-label .switcher {
-    transform: translateX(31px);
-}
+/* Background Visuals */
+.bg-blur { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+.shape { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; animation: float 15s infinite alternate; }
+.shape-1 { width: 40vw; height: 40vw; background: var(--primary); top: -10%; left: -10%; }
+.shape-2 { width: 35vw; height: 35vw; background: var(--secondary); bottom: -10%; right: -10%; }
+@keyframes float { from { transform: translate(0,0); } to { transform: translate(30px, 30px); } }
 
 /* Navigation */
 .top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background: var(--glass);
-    backdrop-filter: blur(10px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 5%; background: var(--glass); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 1000;
 }
+.logo { font-size: 1.5rem; font-weight: 800; }
+.logo span { color: var(--primary); }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: 800;
+/* Theme Switcher */
+.theme-label {
+    width: 55px; height: 28px; background: rgba(255,255,255,0.1);
+    border-radius: 50px; display: flex; align-items: center; justify-content: space-around;
+    cursor: pointer; position: relative; border: 1px solid var(--glass-border);
 }
-
-.logo span {
-    color: var(--primary);
+.switcher {
+    position: absolute; width: 22px; height: 22px; border-radius: 50%;
+    background: white; left: 3px; transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
+.theme-input:checked + .theme-label .switcher { transform: translateX(27px); }
+.theme-input { display: none; }
 
-/* Input Tiles - The "Carved" Look */
-.salary-box {
-    background: rgba(124, 58, 237, 0.08);
-    padding: 25px;
-    border-radius: 24px;
-    border: 1px dashed var(--primary);
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-.input-glow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: 800;
-}
-
-.input-glow input {
-    background: transparent;
-    border: none;
-    color: var(--text);
-    font-size: 2.2rem;
-    width: 180px;
-    outline: none;
-    text-align: center;
-}
-
-.input-row {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.input-tile {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 18px;
-    padding: 12px 20px;
-    flex: 1;
-    transition: 0.3s;
-    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.input-tile:focus-within {
-    border-color: var(--primary);
-    background: rgba(255, 255, 255, 0.07);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.input-tile label {
-    font-size: 0.75rem;
-    color: var(--primary);
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.input-tile input {
-    background: transparent;
-    border: none;
-    color: var(--text);
-    font-size: 1.1rem;
-    width: 100%;
-    outline: none;
-    font-weight: 600;
-}
-
-/* The "Glow" Button */
-.glow-btn {
-    width: 100%;
-    padding: 1.3rem;
-    border-radius: 18px;
-    border: none;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    color: white;
-    font-weight: 800;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    cursor: pointer;
-    margin-top: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: 0.4s;
-    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
-}
-
-.glow-btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(124, 58, 237, 0.6);
-}
-
-.glow-btn:active {
-    transform: scale(0.98);
-}
-
-/* Analysis Results */
+/* Main Content Grid */
 .app-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 2rem;
-    max-width: 1250px;
-    margin: 5vh auto;
-    padding: 20px;
+    display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+    max-width: 1200px; margin: 2rem auto; padding: 0 1rem;
 }
 
+/* Glass Panels */
 .glass-container {
-    background: var(--glass);
-    backdrop-filter: blur(30px);
-    border: 1px solid var(--glass-border);
-    border-radius: 35px;
-    padding: 2.5rem;
-}
-
-.rec-card {
-    background: rgba(255, 255, 255, 0.04);
-    padding: 18px 25px;
-    border-radius: 20px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-left: 4px solid var(--primary);
-    transition: 0.3s;
-}
-
-.rec-card:hover {
-    transform: translateX(10px);
-    background: rgba(255, 255, 255, 0.08);
-}
-
-@keyframes float {
-    from {
-        transform: translate(0, 0);
-    }
-
-    to {
-        transform: translate(30px, 30px);
-    }
-}
-
-@media (max-width: 900px) {
-    .app-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Full Width Panels */
-.full-width {
-    grid-column: 1 / -1;
-    margin-top: 20px;
-}
-
-.emi-result {
-    text-align: center;
-    margin-top: 20px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-}
-
-/* Action Buttons */
-.action-bar {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-    justify-content: center;
+    background: var(--glass); backdrop-filter: blur(30px);
+    border: 1px solid var(--glass-border); border-radius: 24px; padding: 1.5rem;
     width: 100%;
-    grid-column: 1 / -1;
 }
 
-.secondary-btn,
-.whatsapp-btn {
-    padding: 12px 25px;
-    border-radius: 12px;
-    border: none;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: 0.3s;
+/* Desktop Specifics */
+@media (min-width: 992px) {
+    .app-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+    .full-width { grid-column: span 2; }
+    .glass-container { padding: 2.5rem; }
 }
 
-.secondary-btn {
-    background: var(--glass);
-    color: var(--text);
-    border: 1px solid var(--glass-border);
+/* Salary Section */
+.salary-box {
+    background: rgba(124, 58, 237, 0.1); padding: 1.5rem;
+    border-radius: 20px; border: 1px dashed var(--primary); margin-bottom: 1.5rem;
+    text-align: center;
+}
+.input-glow { display: flex; align-items: center; justify-content: center; width: 100%; }
+.input-glow span { font-size: 2rem; color: var(--primary); font-weight: 800; margin-right: 10px; }
+.input-glow input {
+    background: transparent; border: none; color: var(--text); font-family: inherit;
+    font-size: 2.2rem; width: 100%; max-width: 220px; outline: none; font-weight: 800;
 }
 
-.whatsapp-btn {
-    background: #25D366;
-    color: white;
+/* Flexible Input Rows */
+.input-row { 
+    display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; 
+}
+.input-tile {
+    background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
+    border-radius: 16px; padding: 12px 15px; flex: 1 1 150px; /* Forces wrap on small mobile */
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2); transition: 0.3s ease;
+}
+.input-tile:focus-within { border-color: var(--primary); background: rgba(255,255,255,0.05); }
+
+.input-tile label { 
+    font-size: 0.7rem; color: var(--primary); font-weight: 800; 
+    text-transform: uppercase; display: flex; align-items: center; gap: 5px; margin-bottom: 5px; 
+}
+.input-tile input { 
+    background: transparent; border: none; color: var(--text); 
+    font-size: 1.1rem; width: 100%; outline: none; font-weight: 600; 
 }
 
-.secondary-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+/* Buttons */
+.glow-btn {
+    width: 100%; padding: 1.1rem; border-radius: 16px; border: none;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: white; font-weight: 800; font-size: 1rem; cursor: pointer;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3); transition: 0.3s;
+    margin-top: 1rem;
+}
+.glow-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(124, 58, 237, 0.5); }
+
+/* Output Summary */
+.rec-card {
+    background: rgba(255,255,255,0.04); padding: 1rem; border-radius: 15px;
+    margin-bottom: 0.8rem; display: flex; justify-content: space-between; align-items: center;
+    border-left: 4px solid var(--primary); transition: 0.2s;
+}
+.grad-text { 
+    background: linear-gradient(90deg, var(--primary), var(--secondary)); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
 }
 
-.whatsapp-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+/* Bottom Actions */
+.action-bar { 
+    display: flex; flex-direction: column; gap: 1rem; 
+    padding: 1rem 1rem 3rem; max-width: 600px; margin: 0 auto;
+}
+@media (min-width: 600px) { .action-bar { flex-direction: row; } }
+
+.secondary-btn, .whatsapp-btn {
+    flex: 1; padding: 12px; border-radius: 12px; border: none;
+    font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.whatsapp-btn { background: #25D366; color: white; }
+.secondary-btn { background: var(--glass); color: var(--text); border: 1px solid var(--glass-border); }
+
+/* --- RESPONSIVE MODIFICATIONS ONLY --- */
+
+/* Base Mobile Adjustments (Default for small screens) */
+:root {
+    --font-size-base: 16px;
+}
+
+@media (max-width: 480px) {
+    .logo { font-size: 1.2rem; }
+    
+    .glass-container {
+        padding: 1.2rem; /* Reduced padding for more screen real estate */
+        border-radius: 16px;
+    }
+
+    h2 { font-size: 1.5rem; }
+    
+    /* Salary Input scaling for small screens */
+    .input-glow span { font-size: 1.5rem; }
+    .input-glow input { font-size: 1.8rem; max-width: 160px; }
+
+    /* Force input tiles to 2 columns even on very small screens, 
+       or 1 column if it gets too cramped */
+    .input-row {
+        gap: 0.8rem;
+    }
+    
+    .input-tile {
+        padding: 10px;
+        flex: 1 1 calc(50% - 0.8rem); /* Two-column layout on mobile */
+    }
+
+    /* Result View adjustments */
+    .grad-text { font-size: 2rem !important; }
+    
+    .rec-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .rec-card span:last-child {
+        align-self: flex-end;
+    }
+
+    /* Action bar stays sticky or accessible */
+    .action-bar {
+        padding: 1rem 1rem 2rem;
+        gap: 0.5rem;
+    }
+}
+
+/* Tablet and Foldable devices */
+@media (min-width: 481px) and (max-width: 991px) {
+    .app-grid {
+        grid-template-columns: 1fr; /* Stack panels vertically on tablets */
+        padding: 0 1.5rem;
+    }
+    
+    .input-tile {
+        flex: 1 1 200px; /* Wider tiles for tablets */
+    }
+}
+
+/* Ensure images and charts don't overflow */
+canvas {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Fix for iOS bottom bar issues */
+body {
+    min-height: -webkit-fill-available;
 }
