@@ -92,6 +92,31 @@
             </div>
         </section>
     </main>
+    <section class="glass-container full-width">
+    <h3><i data-lucide="calculator"></i> Property EMI Calculator</h3>
+    <div class="input-row">
+        <div class="input-tile"><label>Loan Amount (₹)</label><input type="number" id="loanAmt" value="5000000"></div>
+        <div class="input-tile"><label>Interest Rate (%)</label><input type="number" id="interest" value="8.5"></div>
+        <div class="input-tile"><label>Tenure (Years)</label><input type="number" id="tenure" value="20"></div>
+    </div>
+    <div class="emi-result">
+        <h4>Monthly EMI: <span id="emi-display" class="gradient-text">₹0</span></h4>
+    </div>
+</section>
+
+<section class="glass-container full-width">
+    <h3><i data-lucide="history"></i> 6-Month Investment Trend</h3>
+    <div class="chart-wrap" style="height: 300px;">
+        <canvas id="historyChart"></canvas>
+    </div>
+</section>
+
+<div class="action-bar">
+    <button onclick="exportPDF()" class="secondary-btn"><i data-lucide="file-text"></i> Export PDF</button>
+    <button onclick="shareWhatsApp()" class="whatsapp-btn"><i data-lucide="message-circle"></i> Share on WhatsApp</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script src="../static/js/script.js"></script>
     <script>lucide.createIcons();</script>
