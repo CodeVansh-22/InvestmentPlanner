@@ -1,58 +1,62 @@
 :root {
-    --bg: #f4f7f6;
-    --card: #ffffff;
-    --text: #333;
-    --primary: #2ecc71;
+    --bg-gradient: linear-gradient(135deg, #e0eafc, #cfdef3);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --text-color: #2d3436;
+    --accent: #6c5ce7;
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 .dark-theme {
-    --bg: #1a1a1a;
-    --card: #2d2d2d;
-    --text: #f4f7f6;
+    --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-color: #f5f6fa;
+    --accent: #a29bfe;
 }
 
 body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', sans-serif;
-    transition: 0.3s;
-}
-
-.container {
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.5s ease;
     display: flex;
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
+    justify-content: center;
+    align-items: center;
 }
 
-.form-section, .results-section {
-    background: var(--card);
-    padding: 2rem;
-    border-radius: 12px;
-    flex: 1;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    width: 90%;
+    max-width: 500px;
 }
 
-.grid-inputs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 20px;
+.result-header { border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; margin-bottom: 20px; }
+.highlight { color: var(--accent); font-weight: bold; }
+
+.portfolio-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--glass-border);
 }
 
-input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-}
-
-.btn-main {
-    background: var(--primary);
-    color: white;
+.btn-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 30px;
     border: none;
-    padding: 12px;
-    width: 100%;
+    background: var(--accent);
+    color: white;
     cursor: pointer;
-    font-weight: bold;
+    transition: transform 0.2s;
 }
