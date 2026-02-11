@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthWise | Investment Planner</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="light-theme">
+    <nav>
+        <h1>WealthWise</h1>
+        <button id="theme-toggle">Toggle Dark Mode</button>
+    </nav>
+
+    <main class="container">
+        <section class="form-section">
+            <h2>Financial Input</h2>
+            <div class="input-group">
+                <label>Monthly Salary (₹)</label>
+                <input type="number" id="salary" placeholder="50000">
+            </div>
+
+            <h3>Home Needs</h3>
+            <div class="grid-inputs">
+                <input type="number" id="food" placeholder="Food">
+                <input type="number" id="electricity" placeholder="Electricity">
+                <input type="number" id="rent" placeholder="Rent/Gas">
+            </div>
+
+            <h3>Miscellaneous</h3>
+            <div class="grid-inputs">
+                <input type="number" id="travel" placeholder="Travel">
+                <input type="number" id="medical" placeholder="Medical">
+            </div>
+
+            <button onclick="calculateInvestment()" class="btn-main">Analyze Finances</button>
+        </section>
+
+        <section class="results-section">
+            <canvas id="expenseChart"></canvas>
+            <div id="recommendation-box">
+                <h3>Investment Pot: <span id="amt-display">₹0</span></h3>
+                <div id="suggestions"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

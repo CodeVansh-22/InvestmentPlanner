@@ -60,10 +60,17 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+# ADDED FOR THIS PROJECT:
+database.db
+*.db
+instance/
 
 # Flask stuff:
 instance/
 .webassets-cache
+# ADDED FOR THIS PROJECT:
+.env
+.flaskenv
 
 # Scrapy stuff:
 .scrapy
@@ -143,6 +150,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+# ADDED FOR THIS PROJECT:
+# Investment Planner Specifics
+exports/*.pdf
+reports/*.pdf
+*.pdf
 
 # Spyder project settings
 .spyderproject
