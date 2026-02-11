@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WealthWise | Premium Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="bg-blur"><div class="shape shape-1"></div><div class="shape shape-2"></div></div>
+    
+    <nav class="top-nav">
+        <div class="logo">Wealth<span>Wise</span></div>
+        <div class="theme-wrapper">
+            <input type="checkbox" id="theme-btn" class="theme-input">
+            <label for="theme-btn" class="theme-label">
+                <i data-lucide="sun" size="14"></i>
+                <i data-lucide="moon" size="14"></i>
+                <span class="switcher"></span>
+            </label>
+        </div>
+    </nav>
+
+    <main class="app-grid">
+        <section class="glass-container">
+            <h2>Financial Blueprint</h2>
+            <div class="salary-box">
+                <label>Monthly Salary</label>
+                <div class="input-glow"><span>₹</span><input type="number" id="salary" value="45000"></div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-tile"><label><i data-lucide="utensils" size="12"></i> Food</label><input type="number" id="food" value="8000"></div>
+                <div class="input-tile"><label><i data-lucide="droplet" size="12"></i> Milk</label><input type="number" id="milk" value="2000"></div>
+            </div>
+            <div class="input-row">
+                <div class="input-tile"><label><i data-lucide="zap" size="12"></i> Power</label><input type="number" id="elec" value="1500"></div>
+                <div class="input-tile"><label><i data-lucide="flame" size="12"></i> Gas</label><input type="number" id="utilities" value="1000"></div>
+            </div>
+            <div class="input-row">
+                <div class="input-tile"><label><i data-lucide="car" size="12"></i> Travel</label><input type="number" id="travel" value="3000"></div>
+                <div class="input-tile"><label><i data-lucide="heart-pulse" size="12"></i> Health</label><input type="number" id="medical" value="1000"></div>
+            </div>
+
+            <button onclick="analyzeFinances()" class="glow-btn">Generate Plan <i data-lucide="sparkles" size="16"></i></button>
+        </section>
+
+        <section class="glass-container" id="result-view">
+            <div style="text-align: center; padding: 5rem 0; opacity: 0.4;">
+                <i data-lucide="line-chart" size="64"></i>
+                <p>Configure your cash flow to see your plan.</p>
+            </div>
+        </section>
+
+        <section class="glass-container full-width">
+            <h3><i data-lucide="calculator"></i> Property EMI</h3>
+            <div class="input-row">
+                <div class="input-tile"><label>Loan (₹)</label><input type="number" id="loanAmt" oninput="calculateEMI()" value="5000000"></div>
+                <div class="input-tile"><label>Rate (%)</label><input type="number" id="interest" oninput="calculateEMI()" value="8.5"></div>
+                <div class="input-tile"><label>Years</label><input type="number" id="tenure" oninput="calculateEMI()" value="20"></div>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;"><h4>Monthly EMI: <span id="emi-display" class="grad-text">₹0</span></h4></div>
+        </section>
+
+        <section class="glass-container full-width">
+            <h3><i data-lucide="history"></i> 6-Month Trend</h3>
+            <div style="height: 250px;"><canvas id="historyChart"></canvas></div>
+        </section>
+    </main>
+
+    <div class="action-bar">
+        <button onclick="exportPDF()" class="secondary-btn"><i data-lucide="file-text"></i> PDF Report</button>
+        <button onclick="shareWhatsApp()" class="whatsapp-btn"><i data-lucide="message-circle"></i> WhatsApp Share</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
