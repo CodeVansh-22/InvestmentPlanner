@@ -1,5 +1,6 @@
 let mainChart = null;
 let trendChart = null;
+let lastPayload = null;
 
 window.onload = () => {
     if (typeof lucide !== 'undefined') lucide.createIcons();
