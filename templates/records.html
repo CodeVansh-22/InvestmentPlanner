@@ -83,7 +83,9 @@
         {% endfor %}
     </tbody>
 </table>
-
+<button onclick="deleteAllRecords()" class="delete-all-btn">
+    🧹 Delete All Records
+</button>
 <script>
 function deleteRecord(id) {
     if (!confirm("Are you sure you want to delete this record?")) return;
@@ -103,6 +105,21 @@ function deleteRecord(id) {
         alert("Error deleting record");
     });
 }
+function deleteAllRecords() {
+    if (!confirm("This will delete ALL records and reset IDs. Continue?")) return;
+
+    fetch("https://investmentplanner-mhxc.onrender.com/admin/delete-all", {
+        method: "DELETE"
+    })
+    .then(res => {
+        if (res.ok) {
+            location.reload();
+        } else {
+            alert("Failed to delete all records");
+        }
+    });
+}
+
 </script>
 </body>
 </html>
