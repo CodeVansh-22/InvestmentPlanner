@@ -69,7 +69,6 @@ def calculate():
         "investment_amt": max(0, investment_amt),
         "status": "Success"
     })
-
 # ================= ADMIN VIEW =================
 
 @app.route('/admin/records')
@@ -89,6 +88,12 @@ def test_insert():
     db.session.commit()
     return "TEST INSERT OK"
 
+@app.route("/admin/delete/<int:record_id>", methods=["POST"])
+def delete_record(record_id):
+    record = InvestmentRecord.query.get_or_404(record_id)
+    db.session.delete(record)
+    db.session.commit()
+    return "Deleted"
 # ================= RUN =================
 
 if __name__ == '__main__':
