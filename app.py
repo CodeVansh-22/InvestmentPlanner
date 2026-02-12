@@ -43,13 +43,13 @@ def index():
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
-    data = request.json
+    data = request.get_json(force=True)
 
     salary = float(data.get('salary', 0))
 
     home_needs = sum([float(v) for v in data.get('homeNeeds', {}).values()])
     misc = sum([float(v) for v in data.get('misc', {}).values()])
-
+    
     total_expenses = home_needs + misc
     investment_amt = salary - total_expenses
 
