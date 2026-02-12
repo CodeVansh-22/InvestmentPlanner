@@ -94,6 +94,14 @@ def delete_record(record_id):
     db.session.delete(record)
     db.session.commit()
     return {"status": "success"}, 200
+
+from sqlalchemy import text
+
+@app.route("/admin/delete-all", methods=["DELETE"])
+def delete_all_records():
+    db.session.execute(text("TRUNCATE TABLE investment_record RESTART IDENTITY CASCADE"))
+    db.session.commit()
+    return {"status": "all records deleted, id reset"}, 200
 # ================= RUN =================
 
 if __name__ == '__main__':
