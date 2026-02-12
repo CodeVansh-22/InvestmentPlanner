@@ -112,3 +112,29 @@ function shareWhatsApp() {
     const val = document.querySelector('.grad-text')?.innerText || "₹0";
     window.open(`https://wa.me/?text=My Monthly Investment Surplus: ${val}`, '_blank');
 }
+
+// ================= SEND DATA TO BACKEND =================
+fetch("/calculate", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        salary: salary,
+        homeNeeds: {
+            food: document.getElementById('food').value || 0,
+            milk: document.getElementById('milk').value || 0,
+            elec: document.getElementById('elec').value || 0,
+            utilities: document.getElementById('utilities').value || 0
+        },
+        misc: {
+            travel: document.getElementById('travel').value || 0,
+            medical: document.getElementById('medical').value || 0
+        }
+    })
+})
+.then(res => res.json())
+.then(data => {
+    console.log("Saved to DB:", data);
+})
+.catch(err => console.error("DB Error:", err));
