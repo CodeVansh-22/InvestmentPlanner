@@ -75,6 +75,18 @@ def admin_records():
     records = InvestmentRecord.query.order_by(InvestmentRecord.date.desc()).all()
     return render_template('records.html', records=records)
 
+# ================= Test Run =================
+@app.route("/test-insert")
+def test_insert():
+    r = InvestmentRecord(
+        salary=50000,
+        expenses=20000,
+        investment=30000
+    )
+    db.session.add(r)
+    db.session.commit()
+    return "TEST INSERT OK"
+
 # ================= RUN =================
 
 if __name__ == '__main__':
