@@ -99,9 +99,16 @@ from sqlalchemy import text
 
 @app.route("/admin/delete-all", methods=["DELETE"])
 def delete_all_records():
-    db.session.execute(text("TRUNCATE TABLE investment_record RESTART IDENTITY CASCADE"))
+    # 1. Delete all rows
+    db.session.execute(text("DELETE FROM investment_record"))
+
+    # 2. Reset auto-increment sequence
+    db.session.execute(text(
+        "ALTER SEQUENCE investment_record_id_seq RESTART WITH 1"
+    ))
+
     db.session.commit()
-    return {"status": "all records deleted, id reset"}, 200
+    return {"status": "all records deleted and id reset"}, 200
 # ================= RUN =================
 
 if __name__ == '__main__':
