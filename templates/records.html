@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Records</title>
+    <style>
+    /* Table styling */
+    .investment-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 16px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .investment-table thead tr {
+        background-color: #009879; /* Professional Green */
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .investment-table th, .investment-table td {
+        padding: 12px 15px;
+        border: 1px solid #dddddd;
+    }
+
+    .investment-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    /* Zebra Stripping */
+    .investment-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    /* Hover effect */
+    .investment-table tbody tr:hover {
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
+
+    /* Currency coloring */
+    .text-success { color: #28a745; font-weight: bold; }
+    .text-danger { color: #dc3545; }
+</style>
+</head>
+<body>
+    <table class="investment-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Salary (₹)</th>
+            <th>Expenses (₹)</th>
+            <th>Investment (₹)</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in records %}
+        <tr>
+            <td>{{ r.id }}</td>
+            <td class="text-success">₹{{ "{:,.2f}".format(r.salary) }}</td>
+            <td class="text-danger">₹{{ "{:,.2f}".format(r.expenses) }}</td>
+            <td><strong>₹{{ "{:,.2f}".format(r.investment) }}</strong></td>
+            <td>{{ r.date }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" style="text-align: center;">No records found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
