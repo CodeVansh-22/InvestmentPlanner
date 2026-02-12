@@ -13,6 +13,25 @@ themeBtn.addEventListener('change', () => {
 });
 
 function analyzeFinances() {
+    const payload = JSON.stringify({
+    salary: salary,
+    homeNeeds: {
+        food: document.getElementById('food').value || 0,
+        milk: document.getElementById('milk').value || 0,
+        elec: document.getElementById('elec').value || 0,
+        utilities: document.getElementById('utilities').value || 0
+    },
+    misc: {
+        travel: document.getElementById('travel').value || 0,
+        medical: document.getElementById('medical').value || 0
+    }
+});
+
+if (payload === lastPayload) {
+    console.log("Same data, skipping DB insert");
+    return;
+}
+lastPayload = payload;
     const salary = parseFloat(document.getElementById('salary').value) || 0;
     const expIds = ['food', 'milk', 'elec', 'utilities', 'travel', 'medical'];
     const totalExpenses = expIds.reduce((sum, id) => sum + (parseFloat(document.getElementById(id).value) || 0), 0);
